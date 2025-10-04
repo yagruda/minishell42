@@ -1,3 +1,5 @@
+// ctr +shift + V to see md preview
+
 # execve
 execve is the system call that actually runs a new program in place of the current one. In a minishell, it's the key to executing external commands like ls, cat, or echo.
 
