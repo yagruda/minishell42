@@ -6,7 +6,7 @@
 
 // This program just runs another programm, passed as argument,
 // it requires full path.
-// so run ls is > /bin/ls
+// so run ls is > a.out /bin/ls
 
 int main(int argc, char **argv, char **envp) {
 	if (argc < 2) {
@@ -32,3 +32,7 @@ int main(int argc, char **argv, char **envp) {
 
 	return 0;
 }
+
+// waitpid() -allowed
+// execve() -allowed
+// fork() -allowed
