@@ -6,12 +6,15 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:43:40 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/12 23:49:27 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/13 18:24:01 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
+
+// CTRL+\ is  Process terminating with default action of signal 3 (SIGQUIT)
 int main(int argc, char** argv, char** envp)
 {
 	char* input; 
@@ -28,7 +31,6 @@ int main(int argc, char** argv, char** envp)
 		if (*input)
 		{
 			add_history(input);
-			printf("You entered: %s\n", input);
 		}
 		if (ft_strcmp(input, "exit") == 0)
 		{
@@ -37,8 +39,18 @@ int main(int argc, char** argv, char** envp)
 			break;
 		}
 
+		if (ft_strcmp(input, "") != 0)
+			printf("minishell: %s: command not found\n", input);
+		
 		free(input);
 	}
+	
+
+	// free history that saves every readline run in memory.
+	rl_clear_history();
+
+	// it does after ctrl+d after exit written
+	printf("program finished\n");
 
 	(void)argc;
 	(void)argv;

@@ -1,6 +1,7 @@
+# DELETE -G AT CFLAGS TO DISABLE DEBUGGING
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g 
 SRCDIR = src
 OBJDIR = OBJ
 SRCS = $(shell find $(SRCDIR) -type f -name '*.c')
@@ -25,3 +26,7 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+leaks:
+	valgrind --leak-check=full --show-leak-kinds=all \
+	--suppressions=./supps/readline.supp ./$(NAME)
