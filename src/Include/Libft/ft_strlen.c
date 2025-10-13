@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/12 22:45:04 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/12 23:46:16 by yhruda           ###   ########.fr       */
+/*   Created: 2024/12/16 19:40:54 by admin             #+#    #+#             */
+/*   Updated: 2025/09/06 12:00:53 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "libft.h"
 
-#include "Include/ft_printf.h" // containts libft.h inside as well
+size_t	ft_strlen(const char *s)
+{
+	int	i;
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+	i = 0;
+	while (*s)
+	{
+		i++;
+		s++;
+	}
+	return (i);
+}
 
-#endif
+/*
+int	main(void)
+{
+	printf("%d", ft_strlen("Imarockstar"));
+	return(0);
+}
+*/

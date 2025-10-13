@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/12 22:45:04 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/12 23:46:16 by yhruda           ###   ########.fr       */
+/*   Created: 2024/12/16 19:42:30 by admin             #+#    #+#             */
+/*   Updated: 2025/01/05 17:20:50 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "libft.h"
 
-#include "Include/ft_printf.h" // containts libft.h inside as well
+void	*ft_memset(void *str, int c, size_t len)
+{
+	size_t			i;
+	unsigned char	*ptr;
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+	i = 0;
+	ptr = (unsigned char *)str;
+	while (i < len)
+	{
+		ptr[i] = (unsigned char)c;
+		i++;
+	}
+	return (str);
+}
 
-#endif
+/*
+int	main(void)
+{
+	char	arr[] = "Hello World";
+
+	printf("%s", ft_memset(arr, 'X', 10) );
+	return(0);
+}
+*/

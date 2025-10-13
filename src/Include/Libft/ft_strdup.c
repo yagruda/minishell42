@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/12 22:45:04 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/12 23:46:16 by yhruda           ###   ########.fr       */
+/*   Created: 2024/12/25 11:54:48 by yhruda            #+#    #+#             */
+/*   Updated: 2025/01/05 16:55:08 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "libft.h"
 
-#include "Include/ft_printf.h" // containts libft.h inside as well
+char	*ft_strdup(const char *src)
+{
+	char	*new;
+	int		i;
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+	i = 0;
+	new = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (new == NULL)
+	{
+		return (NULL);
+	}
+	while (*src)
+	{
+		new[i++] = *src++;
+	}
+	new[i] = '\0';
+	return (new);
+}
 
-#endif
+/* int	main(void)
+{
+	return (0);
+} */

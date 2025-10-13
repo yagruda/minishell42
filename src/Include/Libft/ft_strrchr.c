@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/12 22:45:04 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/12 23:46:16 by yhruda           ###   ########.fr       */
+/*   Created: 2024/12/21 12:16:35 by yhruda            #+#    #+#             */
+/*   Updated: 2025/01/05 16:59:10 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "libft.h"
 
-#include "Include/ft_printf.h" // containts libft.h inside as well
+char	*ft_strrchr(const char *s, int c)
+{
+	char	*result;
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+	result = NULL;
+	while (*s != '\0')
+	{
+		if (*s == (char)(c))
+			result = (char *)s;
+		s++;
+	}
+	if (c == '\0' && *s == '\0')
+		return ((char *)s);
+	return (result);
+}
 
-#endif
+/* int main()
+{
+	char* str = "Hello";
+	printf("%s\n", ft_strchr(str, 'p'));
+	printf("%s\n", strrchr(str, 'p'));
+	return (0);
+} */
