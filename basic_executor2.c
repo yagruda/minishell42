@@ -4,9 +4,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//	This programm executes command writen as parameter.  
-//
-//
+// This program just runs another programm, passed as argument.
+// it doesn't require full path. 
+// it tries to find comand in bin, and if finds, runs it. 
+// a.out ls
 
 char *next_token(const char *src, int *pos) {
     int start = *pos;
