@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//	This programm executes command writen as parameter.  
+//
+//
+
 char *next_token(const char *src, int *pos) {
     int start = *pos;
     int len = 0;
@@ -114,5 +118,3 @@ int main(int argc, char **argv, char **envp) {
 // strchr 	- not
 // strtok	- not
 // strdup	- not
-
-
