@@ -29,4 +29,4 @@ re: fclean all
 
 leaks:
 	valgrind --leak-check=full --show-leak-kinds=all \
-	--suppressions=./supps/readline.supp ./$(NAME)
+	--suppressions=./supps/	readline.supp ./$(NAME)

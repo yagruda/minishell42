@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:45:04 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/13 16:34:32 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/14 14:25:31 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define MINISHELL_H
 
 #include "Include/ft_printf.h" // containts libft.h inside as well
+#include "tokenizer/tokenizer.h"
+#include "parser/parser.h"
 
 #include <signal.h>
 #include <stdio.h>

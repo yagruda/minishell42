@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:43:40 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/13 21:56:19 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/14 14:26:03 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 int main(int argc, char** argv, char** envp)
 {
 	char* input; 
+	
+	handle_signals();
 	
 	while(1)
 	{
