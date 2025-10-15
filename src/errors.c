@@ -1,14 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_core.c                                   :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 14:25:20 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/15 15:59:26 by yhruda           ###   ########.fr       */
+/*   Created: 2025/10/15 16:27:18 by yhruda            #+#    #+#             */
+/*   Updated: 2025/10/15 16:42:48 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
+void custom_error(char *msg)
+{
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	while (*msg)
+	{
+		if(*msg == '\n')
+			write(STDERR_FILENO, "\n", 1);
+		else
+			write(STDERR_FILENO, msg, 1);
+		msg++;
+	}
+}

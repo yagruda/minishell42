@@ -6,58 +6,64 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:43:40 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/14 14:26:03 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/15 18:49:18 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-
-// CTRL+\ is  Process terminating with default action of signal 3 (SIGQUIT)
-int main(int argc, char** argv, char** envp)
+// TBD: in main create and make basic t_shell structure to work with it
+void handle_input(t_shell *shell, char **argv)
 {
-	char* input; 
+	(void)shell;
+	(void)argv;
+
+	char* input;
 	
-	handle_signals();
-	
-	while(1)
+	while (1)
 	{
 		input = readline("minishell> ");
-		if (!input)
+		if (!input) //
 		{
 			printf("exit\n");
 			free(input);
 			break;
 		}
-		if (*input)
+		if(input)
 		{
-			add_history(input);
-		}
-		if (ft_strcmp(input, "exit") == 0)
-		{
-			printf("exit\n");
+			process_input(shell, input, argv);
 			free(input);
-			break;
 		}
-
-		if (ft_strcmp(input, "") != 0)
-			printf("minishell: %s: command not found\n", input);
-		
-		free(input);
+		else
+		{
+			rl_clear_history();
+		// TBD:	free_shell(shell);
+			exit(EXIT_SUCCESS);
+		}
 	}
 	
+}
+// maybe tbd free input after processing it
 
-	// free history that saves every readline run in memory.
-	rl_clear_history();
 
-	// it does after ctrl+d after exit written
-	printf("program finished\n");
-
+int main(int argc, char** argv, char** envp)
+{
 	(void)argc;
 	(void)argv;
 	(void)envp;
 
+	if (argc > 1)
+		custom_error("Arguments aren't supported\n");
+	
+	handle_signals();
+	handle_input(NULL, argv);
+	
+	// it does after ctrl+d after exit written
+	printf("program finished (delete me before final)\n");
+
+	// now I have rl_clear_history in handle_input before exit, but in case of work, change it
+	
 	return 0;
 }
 
