@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 16:27:18 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/19 16:18:45 by yhruda           ###   ########.fr       */
+/*   Created: 2025/10/19 20:45:24 by yhruda            #+#    #+#             */
+/*   Updated: 2025/10/19 20:46:54 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void custom_error(char *msg)
-{
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	while (*msg)
-	{
-		if(*msg == '\n')
-			write(STDERR_FILENO, "\n", 1);
-		else
-			write(STDERR_FILENO, msg, 1);
-		msg++;
-	}
-}
+//assist_functions.c
+int ft_isspace(char c);
+
+// init_or_free.c
+t_shell* init_shell(char **envp);
+void free_shell(t_shell *shell);

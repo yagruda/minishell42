@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:22:32 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/15 18:37:54 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/19 21:47:07 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			**argv;   // аргументы команды: ["ls", "-la", NULL]
-	t_redir			*redir;   // список редиректов
+	t_redir			*redir;   // список редиректов	
 	struct s_cmd	*next;    // следующая команда (если есть пайп)
 }	t_cmd;
 
@@ -60,5 +60,6 @@ void hide_ctrl_c(void);
 void handle_sigint(int sig);
 void handle_signals(void);
 int quotes_closed(char* input);
+int is_empty(char* input); 
 
 #endif

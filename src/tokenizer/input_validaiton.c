@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 18:00:50 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/15 19:00:20 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/19 20:45:00 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,14 @@ int quotes_closed(char* input)
 		return 0; 
 	return 1;
 }
-int isnt_empty(char* input)
+int is_empty(char* input)
 {
-	(void) input;
+	while (*input)
+	{
+		if (!ft_isspace(*input))
+			return 0;
+		input++;
+	}
+	return 1;
 	// TBD
 }

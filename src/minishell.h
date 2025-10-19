@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:45:04 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/15 18:31:43 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/19 21:47:04 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "Include/ft_printf.h" // containts libft.h inside as well
 #include "tokenizer/tokenizer.h"
 #include "parser/parser.h"
+#include "utils/utils.h"
 
 // to switch off showing contrling symbols (^C) using tcgetattr func
 #include <termios.h>
@@ -31,5 +32,10 @@
 void custom_error(char *msg);
 void process_input(t_shell *shell, char *input, char **argv);
 
+
+
+
+// FOR DEBUG PURPOSES ONLY
+void example_structures_init(t_shell *shell);
 
 #endif

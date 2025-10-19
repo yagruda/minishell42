@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:43:40 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/15 18:49:18 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/19 21:47:05 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,23 @@ int main(int argc, char** argv, char** envp)
 	(void)argv;
 	(void)envp;
 
+	t_shell* shell;
+
 	if (argc > 1)
 		custom_error("Arguments aren't supported\n");
 	
 	handle_signals();
-	handle_input(NULL, argv);
+	shell = init_shell(envp);
+	handle_input(shell, argv);
 	
 	// it does after ctrl+d after exit written
 	printf("program finished (delete me before final)\n");
 
 	// now I have rl_clear_history in handle_input before exit, but in case of work, change it
 	
+	example_structures_init(shell);
+
+	free_shell(shell);
 	return 0;
 }
 
