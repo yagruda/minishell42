@@ -36,3 +36,6 @@ If execve fails, it returns -1 and sets errno. Always check with perror().
 It does not return on success. The current process is replaced.
 
 You must fork() first—never call execve in the main shell process unless you want to kill your shell.
+
+## Youtube explanation:
+[Using execve in C](https://www.youtube.com/watch?v=iq7puCxsgHQ)

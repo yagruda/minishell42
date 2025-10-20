@@ -1,14 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   basic_executor2.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/15 00:11:08 by andrew            #+#    #+#             */
+/*   Updated: 2025/10/20 10:09:00 by andrew           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "executor.h"
 
 // This program just runs another programm, passed as argument.
 // it doesn't require full path. 
 // it tries to find comand in bin, and if finds, runs it. 
 // a.out ls
 
+// function finds next path line from local path variable
 char *next_token(const char *src, int *pos) {
     int start = *pos;
     int len = 0;
@@ -85,6 +99,7 @@ int main(int argc, char **argv, char **envp) {
 		return 1;
 	}
 
+	init();
 	pid_t pid = fork();
 	if (pid < 0) {
 		write(2, "error: fatal\n", 13);
