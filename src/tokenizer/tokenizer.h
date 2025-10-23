@@ -6,12 +6,13 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:22:32 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/19 21:47:07 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/23 19:46:37 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZER_H
 #define TOKENIZER_H
+
 
 typedef enum e_token_type
 {
@@ -55,11 +56,12 @@ typedef struct s_shell
 	int		exit_code;
 }	t_shell;
 
-
 void hide_ctrl_c(void);
 void handle_sigint(int sig);
 void handle_signals(void);
-int quotes_closed(char* input);
-int is_empty(char* input); 
+int quotes_closed(const char* input);
+int is_empty(const char* input); 
+int is_redirect_correct(const char* input);
+int is_pipe_correct(const char *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:45:04 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/19 21:47:04 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/21 16:50:33 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@
 //errors.c
 void custom_error(char *msg);
 void process_input(t_shell *shell, char *input, char **argv);
-
-
-
 
 // FOR DEBUG PURPOSES ONLY
 void example_structures_init(t_shell *shell);

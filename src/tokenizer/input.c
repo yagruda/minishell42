@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 16:42:23 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/21 14:56:10 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/23 19:46:49 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,22 @@ int input_is_valid(char* input, t_shell *shell)
 	{
 		custom_error("syntax error: empty input\n");
 		shell->exit_code = 258;
+		printf("exit code set to %d\n", shell->exit_code);
+		// TBD: mark is_valid = 0 in shell input struct
+		return 0;
+	}
+	if (!is_redirect_correct(input))
+	{
+		custom_error("syntax error near unexpected token `newline'\n");
+		shell->exit_code = 2;
+		printf("exit code set to %d\n", shell->exit_code);
+		// TBD: mark is_valid = 0 in shell input struct
+		return 0;
+	}
+	if (!(is_pipe_correct(input)))
+	{
+		custom_error("syntax error near unexpected token `|'\n");
+		shell->exit_code = 2;
 		printf("exit code set to %d\n", shell->exit_code);
 		// TBD: mark is_valid = 0 in shell input struct
 		return 0;
