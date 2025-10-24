@@ -8,7 +8,7 @@ OBJDIR = OBJ
 SRCS = $(shell find $(SRCDIR) -type f -name '*.c')
 OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
 LIBS = -L/opt/homebrew/opt/readline/lib -lreadline
-# part with -L/opt/homebrew/opt/readline/lib for macOs
+# FOR MAC OS add -L/opt/homebrew/opt/readline/lib in LIBS
 
 
 .PHONY: all clean fclean re
@@ -32,4 +32,4 @@ re: fclean all
 
 leaks:
 	valgrind --leak-check=full --show-leak-kinds=all \
-	--suppressions=./supps/	readline.supp ./$(NAME)
+	--suppressions=./supps/readline.supp ./$(NAME)

@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 16:17:17 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/19 20:40:44 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 14:57:28 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,17 @@ int ft_isspace(char c)
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
 		return 1;
 	return 0;
+}
+//changed to return int
+int	ft_strlen_int(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (*s)
+	{
+		i++;
+		s++;
+	}
+	return (i);
 }

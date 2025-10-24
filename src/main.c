@@ -6,11 +6,12 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:43:40 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/23 19:44:46 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 11:48:06 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 
 // TBD: in main create and make basic t_shell structure to work with it
@@ -55,6 +56,10 @@ int main(int argc, char** argv, char** envp)
 
 	t_shell* shell;
 
+	char* teststr = malloc(sizeof(char) * 1200);
+	if (!teststr)
+		return (1);
+
 	if (argc > 1)
 		custom_error("Arguments aren't supported\n");
 	
@@ -63,12 +68,13 @@ int main(int argc, char** argv, char** envp)
 	handle_input(shell, argv);
 	
 	// it does after ctrl+d after exit written
-	printf("program finished (delete me before final)\n");
+	if (DEBUG)
+		printf("program finished (delete me before final)\n");
 
 	// now I have rl_clear_history in handle_input before exit, but in case of work, change it
 	
 	example_structures_init(shell);
-
+	
 	free_shell(shell);
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 20:35:46 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/19 22:36:51 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 11:50:29 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static void free_tokens(t_token *tok)
         free(tok->value);
         free(tok);
         tok = next;
-		printf("did some free tokens\n"); // FOR DEBUGGING ONLY, DELETE LATER
+        if (DEBUG)
+		    printf("did some free tokens\n"); // FOR DEBUGGING ONLY, DELETE LATER
     }
 }
 
@@ -56,7 +57,8 @@ static void free_redirs(t_redir *r)
         free(r->file);
         free(r);
         r = next;
-		printf("did some free redirs\n"); // FOR DEBUGGING ONLY, DELETE LATER
+        if (DEBUG)
+		    printf("did some free redirs\n"); // FOR DEBUGGING ONLY, DELETE LATER
     }
 }
 
@@ -72,12 +74,15 @@ static void free_cmds(t_cmd *cmd)
             for (size_t i = 0; cmd->argv[i]; ++i)
                 free(cmd->argv[i]);
             free(cmd->argv);
-			printf("did some free cmd argv\n"); // FOR DEBUGGING ONLY, DELETE LATER
+            if (DEBUG)
+		        printf("did some free cmd argv\n"); // FOR DEBUGGING ONLY, DELETE LATER
         }
         free_redirs(cmd->redir);
-		printf("did some free cmd redirs\n"); // FOR DEBUGGING ONLY, DELETE LATER
+		if (DEBUG)
+			printf("did some free cmd redirs\n"); // FOR DEBUGGING ONLY, DELETE LATER
         free(cmd);
-		printf("did some free cmd\n"); // FOR DEBUGGING ONLY, DELETE LATER
+		if (DEBUG)
+			printf("did some free cmd\n"); // FOR DEBUGGING ONLY, DELETE LATER
         cmd = next;
     }
 }

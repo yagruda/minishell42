@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 21:39:11 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/19 21:47:02 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 11:46:44 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void example_structures_init(t_shell *shell)
     cmd1->next = cmd2;
     shell->cmd_list = cmd1;
 
-    debug_print_structures(shell);
+    if (DEBUG)
+        debug_print_structures(shell);
 }

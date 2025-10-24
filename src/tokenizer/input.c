@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 16:42:23 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/23 19:46:49 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 11:51:56 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int input_is_valid(char* input, t_shell *shell)
 	if (!quotes_closed(input))
 	{
 		custom_error("syntax error: unclosed quotes\n");
-		shell->exit_code = 258; 
-		printf("exit code set to %d\n", shell->exit_code);
+		shell->exit_code = 258;
+		if (DEBUG)
+			printf("exit code set to %d\n", shell->exit_code);
 		// TBD: mark is_valid = 0 in shell input struct
 		return 0;
 	}
@@ -26,7 +27,8 @@ int input_is_valid(char* input, t_shell *shell)
 	{
 		custom_error("syntax error: empty input\n");
 		shell->exit_code = 258;
-		printf("exit code set to %d\n", shell->exit_code);
+		if (DEBUG)
+			printf("exit code set to %d\n", shell->exit_code);
 		// TBD: mark is_valid = 0 in shell input struct
 		return 0;
 	}
@@ -34,7 +36,8 @@ int input_is_valid(char* input, t_shell *shell)
 	{
 		custom_error("syntax error near unexpected token `newline'\n");
 		shell->exit_code = 2;
-		printf("exit code set to %d\n", shell->exit_code);
+		if (DEBUG)
+			printf("exit code set to %d\n", shell->exit_code);
 		// TBD: mark is_valid = 0 in shell input struct
 		return 0;
 	}
@@ -42,7 +45,8 @@ int input_is_valid(char* input, t_shell *shell)
 	{
 		custom_error("syntax error near unexpected token `|'\n");
 		shell->exit_code = 2;
-		printf("exit code set to %d\n", shell->exit_code);
+		if (DEBUG)
+			printf("exit code set to %d\n", shell->exit_code);
 		// TBD: mark is_valid = 0 in shell input struct
 		return 0;
 	}
@@ -69,6 +73,13 @@ void process_input(t_shell *shell, char* input, char** args)
 		return;
 	}
 	
+	if (ft_strcmp(input, "exit") == 0)
+	{
+		printf("exit\n");
+		rl_clear_history();
+		// TBD:	free_shell(shell);
+		return;
+	}
 	// TBD: call parser here
 
 	// FOR DEBUGGING ONLY, DELETE LATER
