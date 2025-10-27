@@ -8,8 +8,10 @@ The new process is called the child.
 Both processes continue executing the same code after fork().
 
 # 🔍 What does fork() return?
-c
+``
 pid_t pid = fork();
+``
+
 In the parent process, fork() returns the PID of the child (a positive integer).
 
 In the child process, fork() returns 0.
