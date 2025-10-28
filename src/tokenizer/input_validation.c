@@ -12,15 +12,16 @@
 
 #include "../minishell.h"
 
-// 1 - unclosed quotes found
-// 0 - all quotes are closed
-int quotes_closed(const char* input)
+int	quotes_closed(const char *input)
 {
-	(void) input;
-	int i = 0;
-	int single_quote = 0;
-	int double_quote = 0;
-	
+	int	i;
+	int	single_quote;
+	int	double_quote;
+
+	(void)input;
+	i = 0;
+	single_quote = 0;
+	double_quote = 0;
 	while (input[i])
 	{
 		if (input[i] == '\'' && single_quote == 0)
@@ -34,102 +35,79 @@ int quotes_closed(const char* input)
 		i++;
 	}
 	if (single_quote > 0 || double_quote > 0)
-		return 0; 
-	return 1;
+		return (0);
+	return (1);
 }
-int is_empty(const char* input)
+
+int	is_empty(const char *input)
 {
 	while (*input)
 	{
 		if (!ft_isspace(*input))
-			return 0;
+			return (0);
 		input++;
 	}
-	return 1;
-	// TBD
+	return (1);
 }
 
-// VALID INPUTS:
-// > s > s2 > s3 > s4 > s5 
-// >>s >> s2 >> s2 >>s2 >>s2
-// INVALID INPUTS:
-// >>>s
-// >
-// ><, <>, >>>
-// >|
-// >          |
+static int	check_redirect_symbol(const char **s, char p)
+{
+	if ((**s == '>' && p == '<') || (**s == '<' && p == '>') || (**s == '|'))
+		return (0);
+	else if (**s == p)
+		(*s)++;
+	if (!**s || **s == '>' || **s == '<')
+		return (0);
+	while (**s && ft_isspace(**s))
+		(*s)++;
+	if (**s == '|' || **s == '>' || **s == '<' || !**s)
+		return (0);
+	return (1);
+}
 
-// checks for >< , <>, >>>, 
 int	is_redirect_correct(const char *s)
 {
-	char p;
+	char	p;
 
 	while (*s)
 	{
 		if (*s == '>' || *s == '<')
 		{
 			p = *s;
-			
 			s++;
-			
 			if (!*s)
-				return 0;
-		
-			if ((*s == '>' && p == '<') || (*s == '<' && p == '>') || (*s == '|'))
-				return 0;
-			else if (*s == p)
-				s++;
-				
-			if(!*s || *s == '>' || *s == '<')
-				return 0;
-			
-			while (*s && ft_isspace(*s))
-			{
-				s++;
-			}
-			
-			if (*s == '|' || *s == '>' || *s == '<' || !*s)
-				return 0;
+				return (0);
+			if (!check_redirect_symbol(&s, p))
+				return (0);
 		}
 		else
 			s++;
 	}
-	return 1;
+	return (1);
 }
-/*
-no consecutive pipes. even with spaces.  || or |   |
-no pipes at the start or at the end. | cmd1 | cmd2 |
 
-so, here has to be atleast one character at left and right side from the pipe.
-*/
-int is_pipe_correct(const char *s)
+int	is_pipe_correct(const char *s)
 {
-	// double check for safety. first check for empty input is done in main.
 	if (!s)
-		return 0;
-
-	if (s[0] == '|' || s[ft_strlen_int(s)-1] == '|')
-		return 0;
-	
+		return (0);
+	if (s[0] == '|' || s[ft_strlen_int(s) - 1] == '|')
+		return (0);
 	while (*s)
 	{
 		if (*s == '|')
 		{
 			s++;
-			if(!*s)
-				return 0;	
+			if (!*s)
+				return (0);
 			if (*s == '|')
-				return 0;
+				return (0);
 			while (ft_isspace(*s))
 				s++;
-			if(!*s || *s == '|')
-				return 0;
+			if (!*s || *s == '|')
+				return (0);
 		}
 		else
-		{
 			s++;
-		}
 	}
-	return 1;
+	return (1);
 }
-

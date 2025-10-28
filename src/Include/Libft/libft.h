@@ -51,6 +51,6 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t n);
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

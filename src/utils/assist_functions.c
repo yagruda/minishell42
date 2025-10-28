@@ -12,13 +12,15 @@
 
 #include "../minishell.h"
 
-int ft_isspace(char c)
+int	ft_isspace(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
-		return 1;
-	return 0;
+	if (c == ' ' || c == '\t' || c == '\n')
+		return (1);
+	if (c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
 }
-//changed to return int
+
 int	ft_strlen_int(const char *s)
 {
 	int	i;

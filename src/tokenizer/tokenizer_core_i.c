@@ -6,125 +6,80 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:25:20 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/28 15:44:10 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/28 18:30:00 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// Helper: Skip whitespace
-static char *skip_spaces(char *str)
+static char	*process_redirect_in(char **input, t_shell *shell)
 {
-    while (*str && ft_isspace(*str))
-        str++;
-    return str;
+	t_token	*token;
+
+	if (*(*input + 1) == '<')
+	{
+		token = create_token(ft_strdup("<<"), HEREDOC);
+		*input += 2;
+	}
+	else
+	{
+		token = create_token(ft_strdup("<"), REDIRECT_IN);
+		(*input)++;
+	}
+	add_token(&shell->tokens, token);
+	return (*input);
 }
 
-// Helper: Extract word until delimiter
-static char *extract_word(char *str, int *len)
+static char	*process_redirect_out(char **input, t_shell *shell)
 {
-    int i = 0;
-    int in_squote = 0;
-    int in_dquote = 0;
+	t_token	*token;
 
-    while (str[i])
-    {
-        if (str[i] == '\'' && !in_dquote)
-            in_squote = !in_squote;
-        else if (str[i] == '"' && !in_squote)
-            in_dquote = !in_dquote;
-        else if (!in_squote && !in_dquote)
-        {
-            if (ft_isspace(str[i]) || str[i] == '|' || 
-                str[i] == '<' || str[i] == '>')
-                break;
-        }
-        i++;
-    }
-    *len = i;
-    return ft_substr(str, 0, i);
+	if (*(*input + 1) == '>')
+	{
+		token = create_token(ft_strdup(">>"), APPEND);
+		*input += 2;
+	}
+	else
+	{
+		token = create_token(ft_strdup(">"), REDIRECT_OUT);
+		(*input)++;
+	}
+	add_token(&shell->tokens, token);
+	return (*input);
 }
 
-// Create new token
-static t_token *create_token(char *value, t_token_type type)
+static char	*process_token(char *input, t_shell *shell)
 {
-    t_token *token = malloc(sizeof(t_token));
-    if (!token)
-        return NULL;
-    token->value = value;
-    token->type = type;
-    token->next = NULL;
-    return token;
+	int		len;
+	char	*word;
+	t_token	*token;
+
+	if (*input == '|')
+	{
+		token = create_token(ft_strdup("|"), PIPE);
+		add_token(&shell->tokens, token);
+		input++;
+	}
+	else if (*input == '<')
+		input = process_redirect_in(&input, shell);
+	else if (*input == '>')
+		input = process_redirect_out(&input, shell);
+	else
+	{
+		word = extract_word(input, &len);
+		token = create_token(word, WORD);
+		add_token(&shell->tokens, token);
+		input += len;
+	}
+	return (input);
 }
 
-// Add token to end of list
-static void add_token(t_token **head, t_token *new_token)
+void	tokenizer(t_shell *shell, char *input)
 {
-    t_token *current;
-
-    if (!*head)
-    {
-        *head = new_token;
-        return;
-    }
-    current = *head;
-    while (current->next)
-        current = current->next;
-    current->next = new_token;
+	input = skip_spaces(input);
+	while (*input)
+	{
+		input = process_token(input, shell);
+		input = skip_spaces(input);
+	}
 }
-
-// Main tokenizer function
-void tokenizer(t_shell *shell, char *input)
-{
-    int len;
-    char *word;
-    t_token *token;
-
-    input = skip_spaces(input);
-    while (*input)
-    {
-        if (*input == '|')
-        {
-            token = create_token(ft_strdup("|"), PIPE);
-            add_token(&shell->tokens, token);
-            input++;
-        }
-        else if (*input == '<')
-        {
-            if (*(input + 1) == '<')
-            {
-                token = create_token(ft_strdup("<<"), HEREDOC);
-                input += 2;
-            }
-            else
-            {
-                token = create_token(ft_strdup("<"), REDIRECT_IN);
-                input++;
-            }
-            add_token(&shell->tokens, token);
-        }
-        else if (*input == '>')
-        {
-            if (*(input + 1) == '>')
-            {
-                token = create_token(ft_strdup(">>"), APPEND);
-                input += 2;
-            }
-            else
-            {
-                token = create_token(ft_strdup(">"), REDIRECT_OUT);
-                input++;
-            }
-            add_token(&shell->tokens, token);
-        }
-        else
-        {
-            word = extract_word(input, &len);
-            token = create_token(word, WORD);
-            add_token(&shell->tokens, token);
-            input += len;
-        }
-        input = skip_spaces(input);
-    }
-}
-

@@ -12,11 +12,10 @@
 
 #include "../minishell.h"
 
-// Free all tokens in the list
-void free_tokens(t_token *tokens)
+void	free_tokens(t_token *tokens)
 {
-	t_token *current;
-	t_token *next;
+	t_token	*current;
+	t_token	*next;
 
 	current = tokens;
 	while (current)
@@ -29,11 +28,10 @@ void free_tokens(t_token *tokens)
 	}
 }
 
-// Free all redirects in the list
-void free_redirects(t_redir *redir)
+void	free_redirects(t_redir *redir)
 {
-	t_redir *current;
-	t_redir *next;
+	t_redir	*current;
+	t_redir	*next;
 
 	current = redir;
 	while (current)
@@ -46,48 +44,45 @@ void free_redirects(t_redir *redir)
 	}
 }
 
-// Free all commands in the list
-void free_commands(t_cmd *cmd_list)
+static void	free_argv_array(char **argv)
 {
-	t_cmd *current;
-	t_cmd *next;
-	int i;
+	int	i;
+
+	if (!argv)
+		return ;
+	i = 0;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}
+
+void	free_commands(t_cmd *cmd_list)
+{
+	t_cmd	*current;
+	t_cmd	*next;
 
 	current = cmd_list;
 	while (current)
 	{
 		next = current->next;
-		
-		// Free argv array
-		if (current->argv)
-		{
-			i = 0;
-			while (current->argv[i])
-			{
-				free(current->argv[i]);
-				i++;
-			}
-			free(current->argv);
-		}
-		
-		// Free redirects
+		free_argv_array(current->argv);
 		if (current->redir)
 			free_redirects(current->redir);
-		
 		free(current);
 		current = next;
 	}
 }
 
-// Clean up shell structures after processing command
-void cleanup_shell_after_cmd(t_shell *shell)
+void	cleanup_shell_after_cmd(t_shell *shell)
 {
 	if (shell->tokens)
 	{
 		free_tokens(shell->tokens);
 		shell->tokens = NULL;
 	}
-	
 	if (shell->cmd_list)
 	{
 		free_commands(shell->cmd_list);

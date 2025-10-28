@@ -12,10 +12,7 @@
 
 #include "../minishell.h"
 
-//assist_functions.c
-int ft_isspace(char c);
-int	ft_strlen_int(const char *s);
-
-// init_or_free.c
-t_shell* init_shell(char **envp);
-void free_shell(t_shell *shell);
+int			ft_isspace(char c);
+int			ft_strlen_int(const char *s);
+t_shell		*init_shell(char **envp);
+void		free_shell(t_shell *shell);
