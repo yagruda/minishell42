@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:08:26 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/21 16:49:25 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 17:00:18 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void hide_ctrl_c(void)
 {
 	struct termios term;
 	
-	tcgetattr(STDIN_FILENO, &term); // get current terminal settings
+	if (tcgetattr(STDIN_FILENO, &term) == -1) // get current terminal settings
+		return;
 	term.c_lflag &= ~ECHOCTL; // turn off showing ^c and ^\ //
 	tcsetattr(STDIN_FILENO, TCSANOW, &term); // apply changes
 }

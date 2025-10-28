@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:22:32 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/23 19:46:37 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 16:28:32 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ int quotes_closed(const char* input);
 int is_empty(const char* input); 
 int is_redirect_correct(const char* input);
 int is_pipe_correct(const char *s);
+int	is_builtin(char *cmd);
 
 #endif

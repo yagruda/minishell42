@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 20:35:46 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/24 11:50:29 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 16:57:28 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,62 +31,6 @@ t_shell* init_shell(char **envp)
 	return shell;
 }
 
-
-// while (tok) wouldn't work if tok is NULL at the beginning
-static void free_tokens(t_token *tok)
-{
-    t_token *next;
-	
-    while (tok) 
-    {
-        next = tok->next;
-        free(tok->value);
-        free(tok);
-        tok = next;
-        if (DEBUG)
-		    printf("did some free tokens\n"); // FOR DEBUGGING ONLY, DELETE LATER
-    }
-}
-
-static void free_redirs(t_redir *r)
-{
-    t_redir *next;
-    while (r)
-    {
-        next = r->next;
-        free(r->file);
-        free(r);
-        r = next;
-        if (DEBUG)
-		    printf("did some free redirs\n"); // FOR DEBUGGING ONLY, DELETE LATER
-    }
-}
-
-static void free_cmds(t_cmd *cmd)
-{
-    t_cmd *next;
-    while (cmd)
-    {
-        next = cmd->next;
-
-        if (cmd->argv)
-        {
-            for (size_t i = 0; cmd->argv[i]; ++i)
-                free(cmd->argv[i]);
-            free(cmd->argv);
-            if (DEBUG)
-		        printf("did some free cmd argv\n"); // FOR DEBUGGING ONLY, DELETE LATER
-        }
-        free_redirs(cmd->redir);
-		if (DEBUG)
-			printf("did some free cmd redirs\n"); // FOR DEBUGGING ONLY, DELETE LATER
-        free(cmd);
-		if (DEBUG)
-			printf("did some free cmd\n"); // FOR DEBUGGING ONLY, DELETE LATER
-        cmd = next;
-    }
-}
-
 // Why free for all items? bc free(shell) only frees "the box", not its contents.
 void free_shell(t_shell *shell)
 {
@@ -94,7 +38,7 @@ void free_shell(t_shell *shell)
         return;
 
     free_tokens(shell->tokens);
-    free_cmds(shell->cmd_list);
+    free_commands(shell->cmd_list);
     // Do NOT free(shell->envp); it's not owned.
     free(shell);
 }

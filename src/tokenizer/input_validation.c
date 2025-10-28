@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 18:00:50 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/24 15:09:56 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 16:35:01 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,12 @@ int	is_redirect_correct(const char *s)
 	}
 	return 1;
 }
+/*
+no consecutive pipes. even with spaces.  || or |   |
+no pipes at the start or at the end. | cmd1 | cmd2 |
+
+so, here has to be atleast one character at left and right side from the pipe.
+*/
 int is_pipe_correct(const char *s)
 {
 	// double check for safety. first check for empty input is done in main.
@@ -127,18 +133,3 @@ int is_pipe_correct(const char *s)
 	return 1;
 }
 
-
-/*
-no consecutive pipes. even with spaces.  || or |   |
-no pipes at the start or at the end. | cmd1 | cmd2 |
-
-so, here has to be atleast one character at left and right side from the pipe.
-*/
-
-
-/*
-pseudo-code:
-go through s
-if | found get into while loop
-
-*/

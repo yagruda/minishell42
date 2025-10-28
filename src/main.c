@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:43:40 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/24 11:48:06 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/24 17:14:45 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 
 // TBD: in main create and make basic t_shell structure to work with it
-void handle_input(t_shell *shell, char **argv)
+static void handle_input(t_shell *shell, char **argv)
 {
 	(void)shell;
 	(void)argv;
@@ -25,8 +25,10 @@ void handle_input(t_shell *shell, char **argv)
 	while (1)
 	{
 		input = readline("minishell> ");
-		if (!input) //
+		if (!input) 
 		{
+			if(DEBUG)
+				printf("CNTRL+D pressed\n");
 			printf("exit\n");
 			free(input);
 			break;
@@ -43,7 +45,6 @@ void handle_input(t_shell *shell, char **argv)
 			exit(EXIT_SUCCESS);
 		}
 	}
-	
 }
 // maybe tbd free input after processing it
 
@@ -55,11 +56,6 @@ int main(int argc, char** argv, char** envp)
 	(void)envp;
 
 	t_shell* shell;
-
-	char* teststr = malloc(sizeof(char) * 1200);
-	if (!teststr)
-		return (1);
-
 	if (argc > 1)
 		custom_error("Arguments aren't supported\n");
 	
