@@ -2,3 +2,6 @@ a.out
 *.out
 *.pdf
 *.gch
+*.txt
+reference_materials/pipex/*.*
+reference_materials/pipex/*
