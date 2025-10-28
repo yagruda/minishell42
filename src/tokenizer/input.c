@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 16:42:23 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/24 17:56:48 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/28 16:09:57 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int process_input(t_shell *shell, char *input, char **argv)
     if (ft_strcmp(input, "exit") == 0)
     {
         printf("exit\n");
+		// TBD: proper exit
         return 1; // Signal exit to main
     }
 

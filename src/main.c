@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:43:40 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/24 17:14:45 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/28 16:10:45 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,6 @@ static void handle_input(t_shell *shell, char **argv)
 
 int main(int argc, char** argv, char** envp)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-
 	t_shell* shell;
 	if (argc > 1)
 		custom_error("Arguments aren't supported\n");

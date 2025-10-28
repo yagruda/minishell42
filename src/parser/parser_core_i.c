@@ -6,7 +6,7 @@
 /*   By: yhruda <yhruda@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 23:19:06 by yhruda            #+#    #+#             */
-/*   Updated: 2025/10/24 17:57:13 by yhruda           ###   ########.fr       */
+/*   Updated: 2025/10/28 16:00:25 by yhruda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ static t_cmd *create_cmd(void)
 static void add_redirect(t_cmd *cmd, char *file, t_token_type type)
 {
     t_redir *new_redir = malloc(sizeof(t_redir));
-    t_redir *current;
-
     if (!new_redir)
         return;
+    t_redir *current;
+
+
     new_redir->type = type;
-    new_redir->file = ft_strdup(file);
+    new_redir->file = strdup(file);
     new_redir->next = NULL;
 
     if (!cmd->redir)
@@ -81,15 +82,17 @@ void parser(t_shell *shell)
     {
         if (token->type == PIPE)
         {
-            current_cmd->next = create_cmd();
+            current_cmd->next = create_cmd(); 
             current_cmd = current_cmd->next;
         }
         else if (token->type == REDIRECT_IN || token->type == REDIRECT_OUT ||
                  token->type == APPEND || token->type == HEREDOC)
         {
+            /* save redirect type before advancing to filename */
+            t_token_type redir_type = token->type;
             token = token->next; // Move to filename
             if (token)
-                add_redirect(current_cmd, token->value, token->type);
+                add_redirect(current_cmd, token->value, redir_type);
         }
         else if (token->type == WORD)
         {
@@ -99,4 +102,3 @@ void parser(t_shell *shell)
     }
     shell->cmd_list = first_cmd;
 }
-
